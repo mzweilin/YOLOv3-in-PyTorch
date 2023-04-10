@@ -33,7 +33,7 @@ from PIL import Image
 from torchvision import transforms as tv_tf
 from torchvision.transforms import functional as TF
 
-from config import EPSILON
+from ..config import EPSILON
 
 
 # def default_transform_fn_old(padding, img_size):
@@ -219,7 +219,7 @@ class PadToSquareWithLabel(object):
                 For example, padding [1, 2, 3, 4] with 2 elements on both sides in symmetric mode
                 will result in [2, 1, 1, 2, 3, 4, 4, 3]
     """
-    
+
     def __init__(self, fill=0, padding_mode='constant'):
         assert isinstance(fill, (numbers.Number, str, tuple))
         assert padding_mode in ['constant', 'edge', 'reflect', 'symmetric']

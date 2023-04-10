@@ -27,7 +27,7 @@
 import logging
 import torch
 
-from config import NUM_CLASSES, EPSILON
+from .config import NUM_CLASSES, EPSILON
 
 
 def post_process(results_raw, nms, conf_thres, nms_thres):

@@ -31,9 +31,9 @@ from PIL import Image
 import torch
 from torch.utils.data import Dataset
 
-from config import NUM_ATTRIB
+from ..config import NUM_ATTRIB
 from .transforms import default_transform_fn, random_transform_fn
-from utils import xywh_to_cxcywh
+from ..utils import xywh_to_cxcywh
 
 
 class CaltechPedDataset(Dataset):

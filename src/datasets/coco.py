@@ -28,9 +28,9 @@ import numpy as np
 import torch
 from torchvision.datasets import CocoDetection
 
-from config import NUM_ATTRIB, NUM_CLASSES_COCO, MISSING_IDS
+from ..config import NUM_ATTRIB, NUM_CLASSES_COCO, MISSING_IDS
 from .transforms import default_transform_fn, random_transform_fn
-from utils import xywh_to_cxcywh
+from ..utils import xywh_to_cxcywh
 
 
 class CocoDetectionBoundingBox(CocoDetection):

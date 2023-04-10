@@ -27,7 +27,7 @@
 import torch
 import torch.nn.functional as F
 
-from config import NOOBJ_COEFF, COORD_COEFF, IGNORE_THRESH, ANCHORS, EPSILON
+from .config import NOOBJ_COEFF, COORD_COEFF, IGNORE_THRESH, ANCHORS, EPSILON
 
 Tensor = torch.Tensor
 

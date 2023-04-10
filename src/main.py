@@ -35,14 +35,14 @@ import torch
 from PIL import Image
 from torch.utils.data import DataLoader
 
-from datasets.utils import collate_img_label_fn
-from datasets.image import ImageFolder
-from datasets.caltech import CaltechPedDataset
-from datasets.coco import CocoDetectionBoundingBox
-from inference import post_process
-from model import YoloNetV3
-from training import yolo_loss_fn
-from utils import load_classes, untransform_bboxes, add_coco_empty_category, cxcywh_to_xywh, init_layer_randomly, draw_result
+from .datasets.utils import collate_img_label_fn
+from .datasets.image import ImageFolder
+from .datasets.caltech import CaltechPedDataset
+from .datasets.coco import CocoDetectionBoundingBox
+from .inference import post_process
+from .model import YoloNetV3
+from .training import yolo_loss_fn
+from .utils import load_classes, untransform_bboxes, add_coco_empty_category, cxcywh_to_xywh, init_layer_randomly, draw_result
 
 
 def parse_args():

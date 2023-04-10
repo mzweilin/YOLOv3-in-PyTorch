@@ -27,7 +27,7 @@
 import torch
 import torch.nn as nn
 
-from config import MISSING_IDS
+from .config import MISSING_IDS
 
 from PIL import ImageDraw, ImageFont
 from torchvision.transforms import ToPILImage
