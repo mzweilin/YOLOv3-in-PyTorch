@@ -131,6 +131,9 @@ def draw_result(img, boxes, font_path, show=False, class_names = None):
         if show_class:
             class_id = int(box[5])
             class_name = class_names[class_id]
+            # Add confidence score
+            confidence = int(box[4] * 100)
+            class_name = f"{class_name} {confidence:d}%"
             font_size = 20
             class_font = ImageFont.truetype(font_path, font_size)
             text_size = draw.textsize(class_name, font=class_font)
