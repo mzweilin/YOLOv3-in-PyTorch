@@ -115,7 +115,7 @@ def xywh_to_cxcywh(bbox):
     return bbox
 
 
-def draw_result(img, boxes, show=False, class_names = None):
+def draw_result(img, boxes, font_path, show=False, class_names = None):
     if isinstance(img, torch.Tensor):
         transform = ToPILImage()
         img = transform(img)
@@ -132,7 +132,7 @@ def draw_result(img, boxes, show=False, class_names = None):
             class_id = int(box[5])
             class_name = class_names[class_id]
             font_size = 20
-            class_font = ImageFont.truetype("../fonts/Roboto-Regular.ttf", font_size)
+            class_font = ImageFont.truetype(font_path, font_size)
             text_size = draw.textsize(class_name, font=class_font)
             draw.rectangle([x, y-text_size[1], x + text_size[0], y], fill='white')
             draw.text([x, y-font_size], class_name, font=class_font, fill='black')

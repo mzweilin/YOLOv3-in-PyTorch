@@ -122,6 +122,8 @@ def parse_args():
                         help="INFERENCE ONLY: object detection confidence threshold during inference.")
     parser.add_argument('--nms-thres', dest='nms_thres', type=float, default=0.4,
                         help="INFERENCE ONLY: iou threshold for non-maximum suppression during inference.")
+    parser.add_argument('--font-path', dest='font_path', type=str, default='fonts/Roboto-Regular.ttf',
+                        help="INFERENCE ONLY: the path to the font file for labling prediction result.")
     _options = parser.parse_args()
     return _options
 
@@ -313,16 +315,16 @@ def save_results_as_json(results, json_path):
     return
 
 
-def save_det_image(img_path, detections, output_img_path, class_names):
+def save_det_image(img_path, detections, font_path, output_img_path, class_names):
     img = Image.open(img_path)
     # Draw bounding boxes and labels of detections
     if detections is not None:
-        img = draw_result(img, detections, class_names=class_names)
+        img = draw_result(img, detections, font_path, class_names=class_names)
     img.save(output_img_path)
     return
 
 
-def save_results_as_images(results, output_dir, class_names):
+def save_results_as_images(results, output_dir, class_names, font_path):
     logging.info('Saving images:')
     # Iterate through images and save plot of detections
     for img_i, result in enumerate(results):
@@ -330,7 +332,7 @@ def save_results_as_images(results, output_dir, class_names):
         logging.info("({}) Image: '{}'".format(img_i, path))
         # Create plot
         img_output_filename = '{}/{}.png'.format(output_dir, img_i)
-        save_det_image(path, detections, img_output_filename, class_names)
+        save_det_image(path, detections, font_path, img_output_filename, class_names)
     return
 
 
@@ -382,7 +384,7 @@ def run_yolo_inference(opt):
         class_names = load_classes(opt.class_path)
         img_path = '{}/{}/img'.format(opt.out_dir, current_datetime_str)
         make_output_dir(img_path)
-        save_results_as_images(results, img_path, class_names)
+        save_results_as_images(results, img_path, class_names, opt.font_path)
     return
 
 
