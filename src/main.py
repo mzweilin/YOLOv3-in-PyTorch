@@ -53,7 +53,7 @@ def parse_args():
     # both:
     parser.add_argument('--dataset', dest='dataset_type', type=str, default='image_folder',
                         help="The type of the dataset used. Currently support 'coco', 'caltech' and 'image_folder'")
-    parser.add_argument('--img-dir', dest='img_dir', type=str, default='../data/samples',
+    parser.add_argument('--img-dir', dest='img_dir', type=str, default='data/samples',
                         help="The path to the folder containing images to be detected or trained.")
     parser.add_argument('--batch-size', dest='batch_size', type=int, default=4,
                         help="The number of sample in one batch during training or inference.")
@@ -70,7 +70,7 @@ def parse_args():
 
     # model loading:
     # both:
-    parser.add_argument('--weight-path', dest='weight_path', type=str, default='../weights/yolov3_original.pt',
+    parser.add_argument('--weight-path', dest='weight_path', type=str, default='weights/yolov3_original.pt',
                         help="The path to weights file for inference or finetune training.")
     parser.add_argument('--cpu-only', dest='cpu_only', action='store_true',
                         help="Use CPU only no matter whether GPU is available.")
@@ -94,7 +94,7 @@ def parse_args():
 
     # saving:
     # inference only:
-    parser.add_argument('--out-dir', dest='out_dir', type=str, default='../output',
+    parser.add_argument('--out-dir', dest='out_dir', type=str, default='output',
                         help="INFERENCE ONLY: The path to the directory of output files.")
     parser.add_argument('--save-img', dest='save_img', action='store_true',
                         help="INFERENCE ONLY: Save output images with detections to output directory.")
@@ -116,7 +116,7 @@ def parse_args():
                         help="TRAINING ONLY: The training learning rate.")
 
     # inference parameters:
-    parser.add_argument('--class-path', dest='class_path', type=str, default='../data/coco.names',
+    parser.add_argument('--class-path', dest='class_path', type=str, default='data/coco.names',
                         help="TINFERENCE ONLY: he path to the file storing class label names.")
     parser.add_argument('--conf-thres', dest='conf_thres', type=float, default=0.8,
                         help="INFERENCE ONLY: object detection confidence threshold during inference.")
