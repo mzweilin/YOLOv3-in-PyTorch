@@ -136,7 +136,7 @@ class RandomRotationWithLabel(tv_tf.RandomRotation):
             return super(RandomRotationWithLabel, self).__call__(img)
         angle = self.get_params(self.degrees)
 
-        return TF.rotate(img, angle, self.resample, self.expand, self.center)
+        return TF.rotate(img, angle, self.interpolation, self.expand, self.center)
 
 
 class RandomAffineWithLabel(tv_tf.RandomAffine):
@@ -151,7 +151,7 @@ class RandomAffineWithLabel(tv_tf.RandomAffine):
             return super(RandomAffineWithLabel, self).__call__(img)
         rot_angle, translate, scale, shear = \
             self.get_params(self.degrees, self.translate, self.scale, self.shear, img.size)
-        img = TF.affine(img, rot_angle, translate, scale, shear, resample=self.resample, fillcolor=self.fillcolor)
+        img = TF.affine(img, rot_angle, translate, scale, shear, interpolation=self.interpolation, fill=self.fill)
         center = (img.size[0] * 0.5 + 0.5, img.size[1] * 0.5 + 0.5)
         affine_transform_matrix = _get_affine_matrix(center, rot_angle, translate, scale, shear)
         label = _affine_transform_label(label, affine_transform_matrix)
