@@ -24,19 +24,19 @@ The repo implements YOLOv3 using the PyTorch framework. Both inference and train
 
 ## Introduction
 
-You-Only-Look-Once (YOLO) newtork was introduced by Joseph Redmon et al. 
+You-Only-Look-Once (YOLO) newtork was introduced by Joseph Redmon et al.
 Three versions were implemented in C, with the framework called [darknet](https://github.com/pjreddie/darknet) (paper: [v1](https://arxiv.org/abs/1506.02640), [v2](https://arxiv.org/abs/1612.08242), [v3](https://arxiv.org/abs/1804.02767)).
 
 This repo implements the Nueral Network (NN) model of YOLOv3 in the PyTorch framework, aiming to ease the pain when the network needs to be modified or retrained.
 
-There are a number of implementations existing in the open source domain, 
+There are a number of implementations existing in the open source domain,
 e.g., [eriklindernoren/PyTorch-YOLOv3](https://github.com/eriklindernoren/PyTorch-YOLOv3),
 [ayooshkathuria/pytorch-yolo-v3](https://github.com/ayooshkathuria/pytorch-yolo-v3),
 [ultralytics/yolov3](https://github.com/ultralytics/yolov3), etc.
 However, majority of them relies on "importing" the configuration file from the original darknet framework.
 In this work, the model is built from scratch using PyTorch.
 
-Additionally, both inference and training part are implemented. 
+Additionally, both inference and training part are implemented.
 The original weights trained by the authors are converted to .pt file.
 It can be used as a baseline for transfer learning.
 
@@ -70,7 +70,7 @@ Detections will be saved in the `output` folder.
 
 ## Prerequisites
 
-The repo is tested in `Python 3.7`. Additionally, the following packages are required: 
+The repo is tested in `Python 3.7`. Additionally, the following packages are required:
 
 ```
 numpy
@@ -97,22 +97,22 @@ The repo is structured as following:
 └── LICENSE
 ```
 
-`src` folder contains the source codes. 
+`src` folder contains the source codes.
 `weights` folder contains the original weight file trained by Joseph Redmon et al.
-`data/coco.names` file lists the names of the categories defined in the COCO dataset. 
+`data/coco.names` file lists the names of the categories defined in the COCO dataset.
 `fonts` folder contains the font used by the Pillow module.
 
 ## Usage
 
 ### Training
 
-The weight trained by Joseph Redmon et al. is used as a starting point. 
-The last few layers of the network can be unfreezed for transfer learning or finetuning. 
+The weight trained by Joseph Redmon et al. is used as a starting point.
+The last few layers of the network can be unfreezed for transfer learning or finetuning.
 
 #### Training on COCO dataset
 
 To train on COCO dataset, first you have to download the dataset from [COCO dataset website](http://cocodataset.org/#home).
-Both images and the annotations are needed. 
+Both images and the annotations are needed.
 Secondly, `pycocotools`, which serves as the Python API for COCO dataset needs to be installed.
 Please follow the instructions on [their github repo](https://github.com/cocodataset/cocoapi) to install `pycocotools`.
 
@@ -224,7 +224,7 @@ optional arguments:
 
 Execution time is measured using the desktop machine described below ("My Machine").
 Test case is detecting COCO val2017 dataset with batch size of 1.
-The data in the "Time from paper (ms)" column is taken from the original YOLOv3 paper 
+The data in the "Time from paper (ms)" column is taken from the original YOLOv3 paper
 ([link](https://arxiv.org/pdf/1804.02767.pdf)), which is not verified on My Machine.
 
 Execution time (ms) per image:
@@ -236,14 +236,14 @@ Execution time (ms) per image:
 |   320x320  	| 15.1 	|   2.9   	|     22     	|
 
 
-The configuration of My Machine: 
+The configuration of My Machine:
 * CPU: Intel Core i7-8086K
 * GPU: Nvidia GeForce GTX 1080 Ti
 * Memory: 32GB
 
 ### COCO Average Precision at IoU=0.5 (AP<sub>50</sub>)
 
-The figure of merit used in object detection is COCO AP. 
+The figure of merit used in object detection is COCO AP.
 For a good explanation of COCO AP (also called mAP), see this [post](https://medium.com/@jonathan_hui/map-mean-average-precision-for-object-detection-45c121a31173).
 
 Especially, AP<sub>50</sub> is extensively used by Redmon et al. to compare the performance of different models.
