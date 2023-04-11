@@ -49,7 +49,7 @@ Before cloning the repo to your local machine, make sure that `git-lfs` is insta
 After `git-lfs` is installed. Run the following command to see sample detection results.
 ```
 git lfs install
-git clone https://github.com/westerndigitalcorporation/YOLOv3-in-PyTorch
+git clone https://github.com/mzweilin/YOLOv3-in-PyTorch
 cd YOLOv3-in-PyTorch
 pip install -r requirements.txt
 cd src
