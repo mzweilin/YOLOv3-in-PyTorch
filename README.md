@@ -51,9 +51,11 @@ After `git-lfs` is installed. Run the following command to see sample detection 
 git lfs install
 git clone https://github.com/mzweilin/YOLOv3-in-PyTorch
 cd YOLOv3-in-PyTorch
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
-cd src
-python3 main.py test --save-img
+pip install -e .
+python -m yolov3.main test --save-img
 
 ```
 Detections will be saved in the `output` folder.
