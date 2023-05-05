@@ -114,19 +114,16 @@ class YoloLayer(nn.Module):
         num_batch = x.size(0)
         num_grid = x.size(2)
 
-        if self.training:
-            output_raw = x.view(num_batch,
-                                NUM_ANCHORS_PER_SCALE,
-                                NUM_ATTRIB,
-                                num_grid,
-                                num_grid).permute(0, 1, 3, 4, 2).contiguous().view(num_batch, -1, NUM_ATTRIB)
-            return output_raw
-        else:
-            prediction_raw = x.view(num_batch,
-                                    NUM_ANCHORS_PER_SCALE,
-                                    NUM_ATTRIB,
-                                    num_grid,
-                                    num_grid).permute(0, 1, 3, 4, 2).contiguous()
+        logits_raw = x.view(num_batch,
+                            NUM_ANCHORS_PER_SCALE,
+                            NUM_ATTRIB,
+                            num_grid,
+                            num_grid).permute(0, 1, 3, 4, 2).contiguous()
+
+        ret = {}
+
+        with torch.no_grad():
+            prediction_raw = logits_raw
 
             self.anchors = self.anchors.to(x.device).float()
             # Calculate offsets for each grid
@@ -146,7 +143,11 @@ class YoloLayer(nn.Module):
             cls_pred = torch.sigmoid(prediction_raw[..., 5:]).view(num_batch, -1, NUM_CLASSES)  # Cls pred one-hot.
 
             output = torch.cat((bbox_pred, conf_pred, cls_pred), -1)
-            return output
+            ret["predictions"] = output
+
+        ret["logits"] = logits_raw.view(num_batch, -1, NUM_ATTRIB)
+
+        return ret
 
 
 class DetectionBlock(nn.Module):
@@ -251,9 +252,10 @@ class YoloNetV3(nn.Module):
     def forward(self, x):
         tmp1, tmp2, tmp3 = self.darknet(x)
         out1, out2, out3 = self.yolo_tail(tmp1, tmp2, tmp3)
-        out = torch.cat((out1, out2, out3), 1)
-        logging.debug("The dimension of the output before nms is {}".format(out.size()))
-        return out
+        out_predictions = torch.cat((out1["predictions"], out2["predictions"], out3["predictions"]), 1)
+        out_logits = torch.cat((out1["logits"], out2["logits"], out3["logits"]), 1)
+        logging.debug("The dimension of the output before nms is {}".format(out_predictions.size()))
+        return {"predictions": out_predictions, "logits": out_logits}
 
     def yolo_last_layers(self):
         _layers = [self.yolo_tail.detect1.conv7,

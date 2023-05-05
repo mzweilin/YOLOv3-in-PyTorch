@@ -208,7 +208,7 @@ def run_detection(model, dataloader, device, conf_thres, nms_thres):
         # Get detections
         start_time = time.time()
         with torch.no_grad():
-            detections = model(img_batch)
+            detections = model(img_batch)["predictions"]
         detections = post_process(detections, True, conf_thres, nms_thres)
 
         for detection, scale, padding in zip(detections, scales, paddings):
@@ -244,7 +244,7 @@ def run_training(model, optimizer, dataloader, device, img_size, n_epoch, every_
                 imgs = imgs.to(device)
                 targets = targets.to(device)
                 target_lengths = target_lengths.to(device)
-                result = model(imgs)
+                result = model(imgs)["logits"]
                 try:
                     losses = yolo_loss_fn(result, targets, target_lengths, img_size, False)
                     losses[0].backward()
