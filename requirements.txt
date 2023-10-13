@@ -1,4 +1,5 @@
 numpy
-pillow
+# Lock to pillow v9.5.0 before the breaking changes in v10.0
+pillow==9.5.0
 torch>=1.0
 torchvision
