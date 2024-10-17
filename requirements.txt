@@ -1,4 +1,4 @@
-numpy
-pillow
-torch>=1.0
-torchvision
+numpy==2.1.2
+pillow==11.0.0
+torch==2.5.0
+torchvision==0.20.0
