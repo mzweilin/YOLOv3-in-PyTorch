@@ -151,7 +151,7 @@ def config_device(cpu_only: bool):
 def load_yolov3_model(weight_path, device, ckpt=False, mode='eval'):
     _model = YoloNetV3(nms=True)
     if not ckpt:
-        _model.load_state_dict(torch.load(weight_path))
+        _model.load_state_dict(torch.load(weight_path, weights_only=True))
     else:
         _model.load_state_dict(torch.load(weight_path)['model_state_dict'])
     _model.to(device)
