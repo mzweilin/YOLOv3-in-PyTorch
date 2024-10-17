@@ -136,8 +136,9 @@ def draw_result(img, boxes, font_path, show=False, class_names = None):
             class_name = f"{class_name} {confidence:d}%"
             font_size = 20
             class_font = ImageFont.truetype(font_path, font_size)
-            text_size = draw.textsize(class_name, font=class_font)
-            draw.rectangle([x, y-text_size[1], x + text_size[0], y], fill='white')
+            text_length = draw.textlength(class_name, font=class_font)
+            text_height = font_size
+            draw.rectangle([x, y-text_height, x + text_length, y], fill='white')
             draw.text([x, y-font_size], class_name, font=class_font, fill='black')
     if show:
         img.show()
